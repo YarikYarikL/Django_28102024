@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 # Create your views here.
 
 author = {
@@ -37,22 +37,22 @@ def about (request):
     return HttpResponse(text)
 
 def single_item(request, num):
+    textResponse = '<h1>Информация о товаре</h1>'
     for i in items:
         if i["id"] == num:
-            text = f'Наименование товара - <b>{i["name"]}</b>, в наличии на складе - <b>{i["quantity"]} шт</b>'
-            break
-    else:
-        text = f'Товар с id={num} не найден'
-    textResponse = text+'<br><a href="items">Назад к списку товаров</a>'
-    return HttpResponse(textResponse)
+            textResponse += f"""
+            <b>{i["name"]}</b><br>
+            в наличии на складе - <b>{i["quantity"]} шт</b><br>
+            <a href="/items">Назад к списку товаров</a>
+            """
+            return HttpResponse(textResponse)
+    return HttpResponseNotFound(f'Товар с id={num} не найден')
+    
 
 
 def list_of_items (request):
-    list_of_items = []
+    textResponse = "<h1>Список товаров</h1><ol>"
     for i in items:
-        item = f"""{i["id"]}    <a href ="item/{i["id"]}">{i["name"]}</a>"""
-        list_of_items.append(item)
-    text = f"""
-    {"<br>".join(list_of_items)}
-    """
-    return HttpResponse(text)
+        textResponse += f"""<li><a href ="item/{i["id"]}">{i["name"]}</li>"""
+    textResponse += "</ol>"
+    return HttpResponse(textResponse)
