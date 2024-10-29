@@ -37,13 +37,10 @@ def about (request):
     return HttpResponse(text)
 
 def single_item(request, num):
-    id_list = []
     for i in items:
-        id_list.append(i["id"])
-    if num in id_list:
-        for i in items:
-            if i["id"] == num:
-                text = f'Наименование товара - <b>{i["name"]}</b>, в наличии на складе - <b>{i["quantity"]} шт</b>'
+        if i["id"] == num:
+            text = f'Наименование товара - <b>{i["name"]}</b>, в наличии на складе - <b>{i["quantity"]} шт</b>'
+            break
     else:
         text = f'Товар с id={num} не найден'
     textResponse = text+'<br><a href="items">Назад к списку товаров</a>'
