@@ -28,14 +28,13 @@ def list_of_items(request):
     return render(request,"items_list.html", context)
 
 def single_item(request, num):
-    context = {
-        "items" : items,
-        "num" : num
-    }
-    for i in items:
-        if i["id"] == num:
-            return render(request,"item_info.html", context)
-    return render(request,"item_not_exists.html", context)
+    item = next((item for item in items if item["id"] == num), None)
+    if item is not None:
+        context = {
+            "item":item
+        }
+        return render(request,"item_info.html", context)
+    return render(request,"item_not_exists.html", {"num":num})
 
 def author_info (request):
     context = {
