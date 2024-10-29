@@ -10,6 +10,15 @@ author = {
     "email": "vasya@mail.ru"
 }
 
+items = [
+   {"id": 1, "name": "Кроссовки abibas", "quantity":5},
+   {"id": 2, "name": "Куртка кожаная", "quantity":2},
+   {"id": 5, "name": "Coca-cola 1 литр", "quantity":12},
+   {"id": 7, "name": "Картофель фри", "quantity":0},
+   {"id": 8, "name": "Кепка", "quantity":124},
+]
+
+
 def home(request):
     text = """
     <h1>"Изучаем django"</h1>
@@ -24,5 +33,29 @@ def about (request):
     Фамилия: <b>{author["Фамилия"]}</b><br>
     телефон: <b>{author["телефон"]}</b><br>
     email: <b>{author["email"]}</b><br>
+    """
+    return HttpResponse(text)
+
+def single_item(request, num):
+    id_list = []
+    for i in items:
+        id_list.append(i["id"])
+    if num in id_list:
+        for i in items:
+            if i["id"] == num:
+                text = f'Наименование товара - <b>{i["name"]}</b>, в наличии на складе - <b>{i["quantity"]} шт</b>'
+    else:
+        text = f'Товар с id={num} не найден'
+    textResponse = text+'<br><a href="items">Назад к списку товаров</a>'
+    return HttpResponse(textResponse)
+
+
+def list_of_items (request):
+    list_of_items = []
+    for i in items:
+        item = f"""{i["id"]}    <a href ="item/{i["id"]}">{i["name"]}</a>"""
+        list_of_items.append(item)
+    text = f"""
+    {"<br>".join(list_of_items)}
     """
     return HttpResponse(text)
