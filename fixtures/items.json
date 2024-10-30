@@ -1,0 +1,110 @@
+[
+{
+    "model": "MainApp.item",
+    "pk": 1,
+    "fields": {
+        "name": "Кроссовки",
+        "brand": "abibas",
+        "count": 10
+    }
+},
+{
+    "model": "MainApp.item",
+    "pk": 2,
+    "fields": {
+        "name": "Куртка кожаная",
+        "brand": "puma",
+        "count": 2
+    }
+},
+{
+    "model": "MainApp.item",
+    "pk": 3,
+    "fields": {
+        "name": "Coca-cola 1л",
+        "brand": "coca-cola",
+        "count": 12
+    }
+},
+{
+    "model": "MainApp.item",
+    "pk": 4,
+    "fields": {
+        "name": "Fanta 1л",
+        "brand": "coca-cola",
+        "count": 7
+    }
+},
+{
+    "model": "MainApp.item",
+    "pk": 5,
+    "fields": {
+        "name": "Кепка",
+        "brand": "puma",
+        "count": 124
+    }
+},
+{
+    "model": "MainApp.item",
+    "pk": 6,
+    "fields": {
+        "name": "Штаны",
+        "brand": "abibas",
+        "count": 5
+    }
+},
+{
+    "model": "MainApp.item",
+    "pk": 7,
+    "fields": {
+        "name": "Картофель",
+        "brand": "пятерочка",
+        "count": 150
+    }
+},
+{
+    "model": "MainApp.item",
+    "pk": 8,
+    "fields": {
+        "name": "Морковь",
+        "brand": "пятерочка",
+        "count": 250
+    }
+},
+{
+    "model": "MainApp.item",
+    "pk": 9,
+    "fields": {
+        "name": "Огурцы",
+        "brand": "пятерочка",
+        "count": 273
+    }
+},
+{
+    "model": "MainApp.item",
+    "pk": 10,
+    "fields": {
+        "name": "Яблоки",
+        "brand": "пятерочка",
+        "count": 120
+    }
+},
+{
+    "model": "MainApp.item",
+    "pk": 11,
+    "fields": {
+        "name": "Mirinda 1л",
+        "brand": "pepsico",
+        "count": 17
+    }
+},
+{
+    "model": "MainApp.item",
+    "pk": 12,
+    "fields": {
+        "name": "7-up 1л",
+        "brand": "pepsico",
+        "count": 31
+    }
+}
+]

@@ -1,18 +1,30 @@
-#FirstDjango_28102024
+# FirstDjango_28102024
 
-##Инструкция по развертыванию проекта
+## Инструкция по развертыванию проекта
 1. 'python3 -m venv django_venv'
 2. 'source django_venv/bin/activate'
 3. 'pip install -r requirements.txt'
 4. 'python manage.py migrate'
 5. 'python manage.py runserver'
 
-##запуск ipython в контексте приложений django:
-'''
-python manage.py shell_plus --ipython
-'''
+## запуск ipython в контексте приложений django:
+    '''
+    python manage.py shell_plus --ipython
+    '''
+## выгрузка данных из БД
+    '''
+    python manage.py dumpdata MainApp --indent 4 > ./fixtures/items.json
+    '''
+    ### примечание - если надо только одну табличку, то MainApp.Item
+    ### .fixtures/items.json = MainApp/fixtures/items.json
 
-##Дополнительно для шаблонов:
+## загрузка данных из БД
+    '''
+    python manage.py loaddata ./fixtures/items.json
+    '''
+
+
+## Дополнительно для шаблонов:
 1. Полезное дополнение для шаблонов 'Django' (в VSCode - Django Baptiste Darthenay)
 '''
 ext install batisteo.vscode-django

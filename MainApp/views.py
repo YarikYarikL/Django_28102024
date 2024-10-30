@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound
-from .models import Item
+from MainApp.models import Item
+from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 
 author = {
@@ -20,15 +21,18 @@ def list_of_items(request):
     return render(request,"items_list.html", context)
 
 def single_item(request, num):
-    single_item = Item.objects.get(id=num)
-    context = {}
-    if single_item is None:
+    try:
+        single_item = Item.objects.get(id=num)
+    except ObjectDoesNotExist:
         return render(request,"item_not_exists.html", {"num":num})
     else:
+        context = {}
         context['name'] = single_item.name
+        context['brand'] = single_item.brand
         context['count'] = single_item.count
+        context['description'] = single_item.description
         return render(request,'item_info.html',context)
-
+        
 
 def author_info (request):
     context = {
