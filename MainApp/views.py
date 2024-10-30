@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound
+from .models import Item
 # Create your views here.
 
 author = {
@@ -10,31 +11,24 @@ author = {
     "email": "ivanovip@mail.ru"
 }
 
-items = [
-   {"id": 1, "name": "Кроссовки abibas", "quantity":5},
-   {"id": 2, "name": "Куртка кожаная", "quantity":2},
-   {"id": 5, "name": "Coca-cola 1 литр", "quantity":12},
-   {"id": 7, "name": "Картофель фри", "quantity":0},
-   {"id": 8, "name": "Кепка", "quantity":124},
-]
-
 def home(request):
     return render(request,"index.html")
 
 def list_of_items(request):
-    context = {
-        "items": items
-    }
+    items = Item.objects.all()
+    context = {"items": items}
     return render(request,"items_list.html", context)
 
 def single_item(request, num):
-    item = next((item for item in items if item["id"] == num), None)
-    if item is not None:
-        context = {
-            "item":item
-        }
-        return render(request,"item_info.html", context)
-    return render(request,"item_not_exists.html", {"num":num})
+    single_item = Item.objects.get(id=num)
+    context = {}
+    if single_item is None:
+        return render(request,"item_not_exists.html", {"num":num})
+    else:
+        context['name'] = single_item.name
+        context['count'] = single_item.count
+        return render(request,'item_info.html',context)
+
 
 def author_info (request):
     context = {
