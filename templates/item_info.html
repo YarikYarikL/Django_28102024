@@ -1,40 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Item info</title>
-    <style>
-        ul.headerlinks li {
-            display: inline-block;
-            border: 1px solid #111;
-            padding: 5px
-        }
-    </style>
-</head>
-<header>
-    <nav>
-        <ul class = "headerlinks">
-            <li><a href="http://127.0.0.1:8000/">Главная</a></li>
-            <li><a href="http://127.0.0.1:8000/items">Список товаров</a></li>
-            <li><a href="http://127.0.0.1:8000/author_info">Информация об авторе</a></li>
-        </ul>
-    </nav>
-</header>
-<body>
-    <h1>Информация о товаре</h1>
-    <h2>{{ name }}<h2>
-        <div>
-            Производитель :: {{ brand }}
-        </div>
-        <div>
-            Описание товара :: {{ description }}
-        </div>
-        <div>
-            Наличие на складе :: {{ count | default:"товар на складе отсутствует" }}
-        </div>
+{% extends "base.html" %}
 
+{% load static %}
+
+{% block title %}
+    ItemInfo
+{% endblock title %}
+
+{% block style %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "css/style.css" %}"
+{% endblock style %}
+
+{% block content %}
+    {{ block.super }}
+    <h2>{{ single_item.name }}</h2>
+        <div>
+            Производитель :: {{ single_item.brand }}
+        </div>
+        <div>
+            Описание товара :: {{ single_item.description }}
+        </div>
+        <div>
+            Имеющиеся цвета ::
+            {% if item_colors %}
+            <ul class = "ul_no_mark">
+                {% for color in item_colors %}
+                    <li><div class ="div_color" style="background-color: {{ color.name }};"></div>&nbsp;&nbsp;
+                        {{ color.name }}
+                    </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            Данные о цветах отсутствуют
+            {% endif %}
+        </div>
+        <div>
+            Наличие на складе :: {{ single_item.count | default:"товар на складе отсутствует" }}
+        </div>
+        
     <br><br>
-    <p><a href="/items">Назад к списку товаров</a></p>
-</body>
-</html>
+    <p><a href="{% url "list_of_items"%}">Назад к списку товаров</a></p>
+{% endblock content %}

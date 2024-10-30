@@ -11,12 +11,15 @@
     '''
     python manage.py shell_plus --ipython
     '''
-## выгрузка данных из БД
+## выгрузка всех данных из БД
     '''
     python manage.py dumpdata MainApp --indent 4 > ./fixtures/items.json
+    эквивалентно
+    python manage.py dumpdata MainApp --indent 4 > MainApp/fixtures/items.json
     '''
-    ### примечание - если надо только одну табличку, то MainApp.Item
-    ### .fixtures/items.json = MainApp/fixtures/items.json
+    ### примечание - если надо только Item модель (один класс):
+    python manage.py dumpdata MainApp.item --indent 4 > ./fixtures/only_items.json
+
 
 ## загрузка данных из БД
     '''

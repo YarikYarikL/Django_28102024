@@ -1,80 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List of items</title>
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+{% extends "base.html" %}
 
-        ul.headerlinks li {
-            display: inline-block;
-            border: 1px solid #111;
-            padding: 5px
-        }
-        
-        .item {
-            width: 150pt;
-            heigth: 100%;
-            margin: 10px;
-            box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
-            border-radius: 4px;
-            padding-top: 10px;
-            background: rgba(223, 241, 244, 0.625);
-        }
+{% load static %}
 
-        .item:hover {
-            background: rgb(207, 232, 237);
-            box-shadow: 4px 8px 16px rgba(71, 215, 240)
-        }
+{% block title %}
+    ItemsList
+{% endblock title %}
 
-        .item p {
-            padding-left: 10px;
-            padding-right: 10px;
-        }
+{% block style %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "css/style.css" %}"
+{% endblock style %}
 
-        .item_name {
-            font-size: 1.5em;
-            text-align: center;
-        }
+{% block content %}
+    {{ block.super }}
 
-        .item a {
-            text-decoration: none;
-            color: black;
-            text-align: justify;
-        }
-
-        .items {
-            width: 100%;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, 200px);
-            max-width: 1200px;
-            justify-content: center;
-            justify-items: center;
-            column-gap: 80px;
-            row-gap: 40px;
-            margin: 0 auto;
-        }
-    </style>
-</head>
-<header>
-    <nav>
-        <ul class = "headerlinks">
-            <li><a href="http://127.0.0.1:8000/">Главная</a></li>
-            <li><a href="http://127.0.0.1:8000/items">Список товаров</a></li>
-            <li><a href="http://127.0.0.1:8000/author_info">Информация об авторе</a></li>
-        </ul>
-    </nav>
-</header>
-<body>
     <h1>Список товаров</h1>
     <div class ="items">
         {% for item in items %}
         <div class ="item">
-            <a href="/item/{{item.id}}">
-                <p class="item_name">{{ item.name }}
+            <a href="{% url "single_item" item.id %}">
+                <p class="item_name">{{ item.name }}</p>
                     <p>Бренд: {{ item.brand }}</p>
                     <p>Описание товара:</p>
                     <p>{{ item.description }}</p>
@@ -83,5 +28,4 @@
         </div>
         {% endfor %}
     </div>
-</body>
-</html>
+{% endblock content %}

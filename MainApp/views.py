@@ -23,14 +23,15 @@ def list_of_items(request):
 def single_item(request, num):
     try:
         single_item = Item.objects.get(id=num)
+        item_colors = []
+        if single_item.colors.exists():
+            item_colors = single_item.colors.all()
     except ObjectDoesNotExist:
         return render(request,"item_not_exists.html", {"num":num})
     else:
-        context = {}
-        context['name'] = single_item.name
-        context['brand'] = single_item.brand
-        context['count'] = single_item.count
-        context['description'] = single_item.description
+        context = {"single_item": single_item,
+                   "item_colors": item_colors,
+                   }
         return render(request,'item_info.html',context)
         
 
